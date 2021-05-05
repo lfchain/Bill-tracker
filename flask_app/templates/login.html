@@ -1,0 +1,62 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h2>Log In</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a href="{{ url_for('users.register') }}"><h3>Register here if you don't have an account</h3></a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="alert alert-warning" role="alert">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <small>{{message}}</small>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {{ form.username(class="form-control") }}
+
+                    {% if form.username.errors %}
+                    <div class="alert alert-warning" role="alert">
+                    {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {{ form.password.label }}
+                    {{ form.password(class="form-control") }}
+
+                    {% if form.password.errors %}
+                    <div class="alert alert-warning" role="alert">
+                    {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

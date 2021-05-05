@@ -1,0 +1,11 @@
+{% extends "header.html" %}
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Welcome to BillTrack</h1>
+      <p>This is a tracker for personal finance. Click below to sign up for an account. </p>
+      <p><a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Sign Up»</a></p>
+    </div>
+</div>
+{% endblock %}
