@@ -10,7 +10,7 @@
         <img class="mr-3 receipt-img" src="data:image/png;base64,{{ get_b64_img(receipt.receipt_img.read()) }}" alt="">
         <div class="media-body">
         <h5 class="mt-0">
-            <a href="{{ url_for('report.edit', hash=receipt.hash) }}">
+            <a href="{{ url_for('report.edit', date=receipt.date, hash=receipt.hash) }}">
                 {{ receipt.description }}
             </a> 
         </h5>

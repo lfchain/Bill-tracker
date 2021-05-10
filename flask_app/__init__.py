@@ -27,7 +27,17 @@ def page_not_found(e):
 
 def create_app():
     app = Flask(__name__)
-
+    csp = {
+        'default-src': [
+            '\'self\'',
+            '\'unsafe-inline\'',
+            'stackpath.bootstrapcdn.com',
+            'code.jquery.com',
+            'cdn.jsdelivr.net'
+        ],
+        'img-src': ['\'self\'', 'data:']
+    }
+    Talisman(app, content_security_policy=csp)
     app.config.from_pyfile("config.py", silent=False)
     
     db.init_app(app)

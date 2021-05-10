@@ -22,10 +22,10 @@ class SearchForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     username = StringField(
-        "Username", validators=[InputRequired(), Length(min=1, max=40)]
+        "Username", validators=[InputRequired(), Length(min=3, max=40)]
     )
     email = StringField("Email", validators=[InputRequired(), Email()])
-    password = PasswordField("Password", validators=[InputRequired()])
+    password = PasswordField("Password", validators=[InputRequired(), Length(min=8, max=16)])
     confirm_password = PasswordField(
         "Confirm Password", validators=[InputRequired(), EqualTo("password")]
     )
@@ -48,7 +48,7 @@ class LoginForm(FlaskForm):
 
 class UpdateUsernameForm(FlaskForm):
     username = StringField(
-        "Username", validators=[InputRequired(), Length(min=1, max=40)]
+        "Username", validators=[InputRequired(), Length(min=3, max=40)]
     )
     submit = SubmitField("Update Username")
 
@@ -67,7 +67,7 @@ class UpdateProfilePicForm(FlaskForm):
     submit = SubmitField('Update')
 
 class ReceiptForm(FlaskForm):
-    receipt = FileField('Photo', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Images Only!')])
+    receipt = FileField('Photo(Optional)', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Images Only!')])
     amount = FloatField("Amount", validators=[InputRequired()])
     date = DateField('Date', validators=[InputRequired()], format='%Y-%m-%d')
     description = StringField('Description', validators=[InputRequired(), Length(min=1, max=100)])

@@ -111,18 +111,18 @@ def receipts(date):
     receipts = Receipt.objects(date=date, user=current_user._get_current_object())
     return render_template("receipts.html", receipts=receipts, get_b64_img = get_b64_img)
 
-@report.route('/delete/<hash>', methods=['GET', 'POST'])
+@report.route('/delete/<date>/<hash>', methods=['GET', 'POST'])
 @login_required
-def delete(hash):
-    receipt = Receipt.objects(hash=hash, user=current_user._get_current_object()).first()
+def delete(date, hash):
+    receipt = Receipt.objects(date=date, hash=hash, user=current_user._get_current_object()).first()
     date = receipt.date
     receipt.delete()
     return redirect(url_for("report.receipts", date=date))
 
-@report.route('/edit/<hash>', methods=['GET', 'POST'])
+@report.route('/edit/<date>/<hash>', methods=['GET', 'POST'])
 @login_required
-def edit(hash):
-    receipt = Receipt.objects(hash=hash, user=current_user._get_current_object()).first()
+def edit(date, hash):
+    receipt = Receipt.objects(date=date, hash=hash, user=current_user._get_current_object()).first()
     update_form = ReceiptForm(
         amount= receipt.cost,
         description = receipt.description,
@@ -142,7 +142,7 @@ def edit(hash):
             receipt.receipt_img.replace(img.stream, content_type=content_type)
 
         receipt.save()
-        return redirect(url_for("report.edit", hash=receipt.hash))
+        return redirect(url_for("report.edit", date=receipt.date, hash=receipt.hash))
 
     return render_template("update.html", form=update_form, receipt=receipt, get_b64_img = get_b64_img)
 
