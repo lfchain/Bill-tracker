@@ -1,5 +1,17 @@
 {% extends "header.html" %}
 {% block content %}
+<div class="row">
+    <div class="col">
+        <form method="POST" action="">
+            {{ date.csrf_token }}
+            <div class="form-group">
+                {{ date.date.label }}
+                {{ date.date(class="datepicker") }}
+            </div>
+            <button type="submit" class="btn btn-outline-success">Search</button>
+        </form>
+    </div>
+</div>
 
 <ul class="nav nav-tabs">
     <li class="nav-item"><a class="nav-link active" href="#Day" aria-controls="home" role="tab" data-toggle="tab">Day</a></li>
@@ -10,14 +22,6 @@
 
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="Day">
-        <form method="POST" action="">
-            {{ date.csrf_token }}
-            <div class="form-group">
-                {{ date.date.label }}
-                {{ date.date(class="datepicker") }}
-            </div>
-            <button type="submit" class="btn btn-outline-success">Search</button>
-        </form>
         {% if message %}
             <h3> {{message}}</h3>
         {% endif %}
