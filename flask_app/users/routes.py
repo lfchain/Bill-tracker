@@ -6,6 +6,7 @@ from ..forms import RegistrationForm, LoginForm, UpdateUsernameForm, UpdateProfi
 from ..models import User
 from werkzeug.utils import secure_filename
 import io, base64
+from pathlib import Path
 
 users = Blueprint('users', __name__)
 
@@ -18,6 +19,9 @@ def register():
     if form.validate_on_submit():
         hashed = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
         user = User(username=form.username.data, email=form.email.data, password=hashed)
+        path = str(Path(__file__).parent)
+        with open(path+"/.."+url_for("static", filename='img/default_user.jpg'), 'rb') as img:
+            user.profile_pic.put(img, content_type='image/jpg')
         user.save()
 
         return redirect(url_for("users.login"))
@@ -37,7 +41,7 @@ def login():
             user.password, form.password.data
         ):
             login_user(user)
-            return redirect(url_for("users.account"))
+            return redirect(url_for("report.summary"))
         else:
             flash("Login failed. Check your username and/or password")
             return redirect(url_for("users.login"))

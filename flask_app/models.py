@@ -17,9 +17,11 @@ class User(db.Document, UserMixin):
         return self.username
 
 class Receipt(db.Document):
-    email = db.EmailField(required=True, unique=True)
+    user = db.ReferenceField(User, required=True)
     date = db.StringField(require=True)
-    receipt_img = db.ImageField()
-    cost = db.IntField(required=True)
+    receipt_img = db.ImageField(require=True)
+    cost = db.FloatField(required=True)
+    category = db.StringField(require=True)
+    hash = db.IntField(required=True)
     description = db.StringField(required=True)
 

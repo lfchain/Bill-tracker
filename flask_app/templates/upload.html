@@ -1,0 +1,73 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {{ form.description.label }}
+                    {{ form.description(class="form-control") }}
+
+                    {% if form.description.errors %}
+                    <div class="alert alert-warning" role="alert">
+                    {% for error in form.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {{ form.category.label }}
+                    {{ form.category(class="form-control") }}
+
+                    {% if form.category.errors %}
+                    <div class="alert alert-warning" role="alert">
+                    {% for error in form.category.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {{ form.date.label }}
+                    {{ form.date(class="form-control") }}
+
+                    {% if form.date.errors %}
+                    <div class="alert alert-warning" role="alert">
+                    {% for error in form.date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {{ form.amount.label }}
+                    {{ form.amount(class="form-control") }}
+
+                    {% if form.amount.errors %}
+                    <div class="alert alert-warning" role="alert">
+                    {% for error in form.amount.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {{ form.receipt.label }}
+                    {{ form.receipt(class="form-control") }}
+
+                    {% if form.receipt.errors %}
+                    <div class="alert alert-warning" role="alert">
+                    {% for error in form.receipt.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <button type="submit" class="btn btn-outline-success">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

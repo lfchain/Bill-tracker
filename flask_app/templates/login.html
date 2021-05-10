@@ -12,21 +12,15 @@
 </div>
 <div class="row">
     <div class="col">
-        <div class="alert alert-warning" role="alert">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
+                    <div class="alert alert-info">
                         <small>{{message}}</small>
+                    </div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <div class="row">
-            <div class="col">
                 <form method="POST" action="">
                 {{ form.csrf_token }}
                 <div class="form-group">
@@ -55,8 +49,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
             </form>
-            </div>
-        </div>
     </div>
 </div>
 {% endblock %}

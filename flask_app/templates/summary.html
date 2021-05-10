@@ -1,0 +1,46 @@
+{% extends "header.html" %}
+{% block content %}
+
+<ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link active" href="#Week" aria-controls="home" role="tab" data-toggle="tab">Week</a></li>
+    <li class="nav-item"><a class="nav-link" href="#Month" aria-controls="profile" role="tab" data-toggle="tab">Month</a></li>
+    <li class="nav-item"><a class="nav-link" href="#Year" aria-controls="messages" role="tab" data-toggle="tab">Year</a></li>
+
+</ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="Week">
+        <form method="POST" action="">
+            {{ date.csrf_token }}
+            <div class="form-group">
+                {{ date.date.label }}
+                {{ date.date(class="datepicker") }}
+            </div>
+            <button type="submit" class="btn btn-outline-success">Search</button>
+        </form>
+        {% if message %}
+            <h3> {{message}}</h3>
+        {% endif %}
+        {% if plot1 %}
+            {{plot1|safe}}
+        {% endif %}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="Month">
+        {% if message %}
+            <h3> {{message}}</h3>
+        {% endif %}
+        {% if plot2 %}
+            {{plot2|safe}}
+        {% endif %}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="Year">
+        {% if message %}
+            <h3> {{message}}</h3>
+        {% endif %}
+        {% if plot3 %}
+            {{plot3|safe}}
+        {% endif %}
+    </div>
+   
+</div>
+{% endblock %}

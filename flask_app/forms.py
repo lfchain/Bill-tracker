@@ -2,7 +2,7 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.utils import secure_filename
-from wtforms import StringField, IntegerField, SubmitField, TextAreaField, PasswordField, FloatField
+from wtforms import StringField, SubmitField, PasswordField, FloatField, SelectField
 from wtforms import validators
 from wtforms.fields.html5 import DateField
 from wtforms.validators import (
@@ -17,7 +17,7 @@ from wtforms.validators import (
 from .models import User
 
 class SearchForm(FlaskForm):
-    date = DateField('DatePicker', validators=[InputRequired()], format="%m/%d/%Y")
+    date = DateField('Date', validators=[InputRequired()], format='%Y-%m-%d')
     submit = SubmitField("Search")
 
 class RegistrationForm(FlaskForm):
@@ -68,8 +68,21 @@ class UpdateProfilePicForm(FlaskForm):
 
 class ReceiptForm(FlaskForm):
     receipt = FileField('Photo', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Images Only!')])
-    amount = FloatField("Cost", validators=[InputRequired()])
-    date = DateField('DatePicker', validators=[InputRequired()], format="%m/%d/%Y")
+    amount = FloatField("Amount", validators=[InputRequired()])
+    date = DateField('Date', validators=[InputRequired()], format='%Y-%m-%d')
+    description = StringField('Description', validators=[InputRequired(), Length(min=1, max=100)])
+    category = SelectField(u'Category', 
+            choices=[('Housing','Housing'),
+                    ('Transportation','Transportation'),
+                    ('Food', 'Food'),
+                    ('Utilities', 'Utilities'),
+                    ('Insurance', 'Insurance'),
+                    ('Medical & Healthcare', 'Medical & Healthcare'), 
+                    ('Saving, Investing, & Debt Payments', 'Saving, Investing, & Debt Payments'),
+                    ('Recreation & Entertainment', 'Recreation & Entertainment'),
+                    ('Miscellaneous', 'Miscellaneous')],
+            validators=[InputRequired()]
+                    )
     submit = SubmitField("Submit")
 
 
