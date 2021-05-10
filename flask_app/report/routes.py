@@ -44,9 +44,15 @@ def summary():
             fig1 = px.pie(receipt_date, values='cost', names='category')
             f1 = io.StringIO()
             fig1.write_html(f1, full_html=False)
+        if len(receipt_month) == 0:
+            return render_template("summary.html", date=date_form, message="Go upload some receipts!")
+        else:
             fig2 = px.pie(receipt_month, values='cost', names='category')
             f2 = io.StringIO()
             fig2.write_html(f2, full_html=False)
+        if len(receipt_year) == 0:
+            return render_template("summary.html", date=date_form, message="Go upload some receipts!")
+        else:
             fig3 = px.pie(receipt_year, values='cost', names='category')
             f3 = io.StringIO()
             fig3.write_html(f3, full_html=False)
