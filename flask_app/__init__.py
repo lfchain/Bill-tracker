@@ -25,12 +25,10 @@ from .report.routes import report
 def page_not_found(e):
     return render_template("404.html"), 404
 
-def create_app(test_config=None):
+def create_app():
     app = Flask(__name__)
 
     app.config.from_pyfile("config.py", silent=False)
-    if test_config is not None:
-        app.config.update(test_config)
     
     db.init_app(app)
     login_manager.init_app(app)
